@@ -70,7 +70,7 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                         <td><?php echo $row['date_created'] ?></td>
                         <td>
                             <p class="m-0"><?php echo $roww['title'] ?></p>
-                            <p class="m-0"><small>By: <?php echo $roww['author'] ?></small></p>
+                            <!-- <p class="m-0"><small>By: <?php echo $roww['author'] ?></small></p> -->
                         </td>
                         <td>
                             <p class="m-0"><?php echo $roww['name'] ?></p>

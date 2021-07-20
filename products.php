@@ -124,7 +124,7 @@ elseif(isset($_GET['s'])){
                                             <span><b>Price: </b><?php echo $v ?></span>
                                         <?php endforeach; ?>
                                     </div>
-                                    <p class="m-0"><small>By: <?php echo $row['author'] ?></small></p>
+                                    <!-- <p class="m-0"><small>By: <?php echo $row['author'] ?></small></p> -->
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
