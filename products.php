@@ -63,7 +63,7 @@ elseif(isset($_GET['s'])){
             <div class="container-fluid p-0">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="book-tab" data-toggle="tab" href="#book" role="tab" aria-controls="book" aria-selected="true">Books</a>
+                    <a class="nav-link active" id="book-tab" data-toggle="tab" href="#book" role="tab" aria-controls="book" aria-selected="true">Items</a>
                 </li>
                 <?php if(isset($_GET['c'])): ?>
                 <li class="nav-item" role="presentation">
