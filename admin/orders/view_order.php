@@ -75,7 +75,7 @@ if($order->num_rows > 0){
             <div class="col-6">
                 <p>Payment Method: <?php echo $payment_method ?></p>
                 <p>Payment Status: <?php echo $paid == 0 ? '<span class="badge badge-light text-dark">Unpaid</span>' : '<span class="badge badge-success">Paid</span>' ?></p>
-                <p>Order Type: <?php echo $order_type == 1 ? '<span class="badge badge-light text-dark">For Delivery</span>' : '<span class="badge badge-light text-dark">Pick-up</span>' ?></p>
+                <p>Order Type: <?php echo $order_type == 1 ? '<span class="badge badge-light text-dark">For Delivery</span>' : '<span class="badge badge-light text-dark">Delivery</span>' ?></p>
             </div>
             <div class="col-6 row row-cols-2">
                 <div class="col-3">Order Status:</div>

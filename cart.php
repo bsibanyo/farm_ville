@@ -51,9 +51,10 @@
                         </div>
                     </div>
                 <?php endwhile; ?>
+
                 
                 <div class="d-flex w-100 justify-content-between mb-2 py-2 border-bottom">
-                    <div class="col-8 d-flex justify-content-end"><h4>Grand Total:</h4></div>
+                    <div class="col-8 d-flex justify-content-end"><h4>Total:</h4></div>
                     <div class="col d-flex justify-content-end"><h4 id="grand-total">-</h4></div>
                 </div>
             </div>
@@ -90,6 +91,9 @@
             }
         }else{
             qty = parseInt(qty) + 1
+            // if(qty >= $row['quantity']){
+            //     qty = $row['quantity'];
+            // }
         }
         price = parseFloat(price)
         // console.log(qty,price)

@@ -35,15 +35,41 @@ $total = 0;
                             <label for="" class="control-label">Delivery Address</label>
                             <textarea id="" cols="30" rows="3" name="delivery_address" class="form-control" style="resize:none"><?php echo $_settings->userdata('default_delivery_address') ?></textarea>
                         </div>
+                        
                         <div class="col">
-
-                            <span><h4><b>Total:</b> <?php echo number_format($total) ?></h4></span>
+                            <h6><b>Delivery:
+                                <?php
+                                    $delivery = 0;
+                                    if($total >= 350){
+                                        $delivery = 0;
+                                        echo "R $delivery";
+                                    }
+                                    else if($total >= 250){
+                                        $delivery = 20;
+                                        echo "R $delivery";
+                                    }
+                                    else if($total >= 150){
+                                        $delivery = 25;
+                                        echo "R $delivery";
+                                    }
+                                    else {
+                                        $delivery = 30;
+                                        echo "R $delivery";
+                                    }
+                                ?>
+                            </b></h6>
+                        </div>
+                <!-- <hr class="border-dark"> -->
+                        <div class="col">
+                            <span><h4><b>Grand Total:</b> R <?php 
+                                $grandTotal = $total + $delivery;
+                            echo number_format($grandTotal) ?></h4></span>
                         </div>
                         <hr>
                         <div class="col my-3">
                         <h4 class="text-muted">Payment Method</h4>
                             <div class="d-flex w-100 justify-content-between">
-                                <button class="btn btn-flat btn-dark">Cash on Delivery</button>
+                                <button class="btn btn-flat btn-dark">Cash/Card on Delivery</button> <b>OR</b>
                                 <span id="paypal-button"></span>
                             </div>
                         </div>
@@ -77,7 +103,7 @@ paypal.Button.render({
                     {
                     	//total purchase
                         amount: { 
-                        	total: '<?php echo $total; ?>', 
+                        	total: '<?php echo $grandTotal; ?>', 
                         	currency: 'PHP' 
                         }
                     }
