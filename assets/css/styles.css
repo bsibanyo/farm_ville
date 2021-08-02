@@ -3355,6 +3355,11 @@ fieldset:disabled .btn {
     border-color: #6c757d;
 }
 
+.btn-outline-secondaryRed {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
 .btn-outline-secondary:hover {
     color: #fff;
     background-color: #198754;
@@ -3363,7 +3368,7 @@ fieldset:disabled .btn {
 .btn-outline-secondaryRed:hover {
     color: #fff;
     background-color: #dc3545;
-    border-color: #dc3545;
+    border-color: #6c757d;
 }
 
 .btn-check:focus+.btn-outline-secondary,
