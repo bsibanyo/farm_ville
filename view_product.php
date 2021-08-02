@@ -56,11 +56,12 @@
                         }
                         else {
                             echo("<input class='form-control text-center me-3' id='inputQuantity' type='num' value='1' style='max-width: 3rem' name='quantity' />");
+                           
                         }
                     ?>
                     <?php
                         if($inv[0]['quantity'] <= 0){
-                            echo "Out of Stock!";
+                            echo "Out of Stock! style=color:red";
                         }
                         else {
                             echo( "<button class='btn btn-outline-dark flex-shrink-0' type='submit'>

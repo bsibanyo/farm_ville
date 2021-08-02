@@ -26,16 +26,17 @@ $total = 0;
                           <input class="custom-control-input custom-control-input-primary" type="radio" id="customRadio4" name="order_type" value="2" checked="">
                           <label for="customRadio4" class="custom-control-label">For Delivery</label>
                         </div>
-                        <div class="custom-control custom-radio ml-3">
+                        <!-- <div class="custom-control custom-radio ml-3">
                           <input class="custom-control-input custom-control-input-primary custom-control-input-outline" type="radio" id="customRadio5" name="order_type" value="1">
                           <label for="customRadio5" class="custom-control-label">For Pick up</label>
-                        </div>
+                        </div> -->
                       </div>
                         <div class="form-group col address-holder">
                             <label for="" class="control-label">Delivery Address</label>
                             <textarea id="" cols="30" rows="3" name="delivery_address" class="form-control" style="resize:none"><?php echo $_settings->userdata('default_delivery_address') ?></textarea>
                         </div>
                         <div class="col">
+
                             <span><h4><b>Total:</b> <?php echo number_format($total) ?></h4></span>
                         </div>
                         <hr>
