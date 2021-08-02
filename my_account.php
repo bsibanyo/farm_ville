@@ -72,7 +72,7 @@
             },
             success:function(resp){
                 if(typeof resp == 'object' && resp.status == 'success'){
-                    alert_toast("Book cancelled successfully",'success')
+                    alert_toast("Product cancelled successfully",'success')
                     setTimeout(function(){
                         location.reload()
                     },2000)

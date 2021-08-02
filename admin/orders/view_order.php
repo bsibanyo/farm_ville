@@ -64,9 +64,33 @@ if($order->num_rows > 0){
                     <?php endwhile; ?>
                 </tbody>
                 <tfoot>
+                <tr>
+                        <th colspan='3'  class="text-right">Delivery</th>
+                        <th class="text-right"><?php 
+                            $delivery = 0;
+                            if($amount >= 350){
+                                $delivery = 0;
+                                echo $delivery;
+                            }
+                            else if($amount >= 250){
+                                $delivery = 20;
+                                echo $delivery;
+                            }
+                            else if($amount >= 150){
+                                $delivery = 25;
+                                echo $delivery;
+                            }
+                            else {
+                                $delivery = 30;
+                                echo $delivery;
+                            }
+                         ?></th>
+                    </tr>
                     <tr>
-                        <th colspan='3'  class="text-right">Total</th>
-                        <th class="text-right"><?php echo number_format($amount) ?></th>
+                        <th colspan='3'  class="text-right">Grand Total</th>
+                        <th class="text-right"><?php 
+                        $grandTotal = $amount + $delivery;
+                        echo number_format($grandTotal) ?></th>
                     </tr>
                 </tfoot>
             </table>
