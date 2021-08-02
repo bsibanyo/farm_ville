@@ -25,6 +25,7 @@
                 </div>
                 <div class="form-group d-flex justify-content-between">
                     <a href="javascript:void()" id="create_account">Don't have an account?</a>
+                    <a href="javascript:void()" id="create_account">Forgot Password?</a>
                     <button class="btn btn-primary btn-flat">Login</button>
                 </div>
             </form>
