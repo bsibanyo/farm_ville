@@ -12,21 +12,16 @@
         </button>
     </h3>
         <div class="col-lg-12">
-            <h3 class="text-center">Login</h3>
+            <h3 class="text-center">Forgot Password</h3>
             <hr>
-            <form action="" id="login-form">
+            <form action="" id="forgot-form">
                 <div class="form-group">
                     <label for="" class="control-label">Email</label>
                     <input type="email" class="form-control form" name="email" required>
                 </div>
-                <div class="form-group">
-                    <label for="" class="control-label">Password</label>
-                    <input type="password" class="form-control form" name="password" required>
-                </div>
                 <div class="form-group d-flex justify-content-between">
-                    <a href="javascript:void()" id="create_account">Don't have an account?</a>
-                    <a href="javascript:void()" id="forgot_account">Forgot Password?</a>
-                    <button class="btn btn-primary btn-flat">Login</button>
+                    <a href="javascript:void()" id="login-show">I Remember?</a>
+                    <button class="btn btn-primary btn-flat">Send Link</button>
                 </div>
             </form>
         </div>
@@ -34,11 +29,8 @@
 </div>
 <script>
     $(function(){
-        $('#create_account').click(function(){
-            uni_modal("","registration.php","mid-large")
-        })
-        $('#forgot_account').click(function(){
-            uni_modal("","forgot_password.php","mid-large")
+        $('#login-show').click(function(){
+            uni_modal("","login.php")
         })
         $('#login-form').submit(function(e){
             e.preventDefault();
