@@ -32,7 +32,7 @@
         $('#login-show').click(function(){
             uni_modal("","login.php")
         })
-        $('#login-form').submit(function(e){
+        $('#forgot-form').submit(function(e){
             e.preventDefault();
             start_loader()
             if($('.err-msg').length > 0)
