@@ -281,8 +281,8 @@ CREATE TABLE `system_info` (
 --
 
 INSERT INTO `system_info` (`id`, `meta_field`, `meta_value`) VALUES
-(1, 'name', 'Farmville'),
-(6, 'short_name', 'Farmville'),
+(1, 'name', 'Farmville&trade;'),
+(6, 'short_name', 'Farmville&trade;'),
 (11, 'logo', 'uploads/farmville.ico'),
 (13, 'user_avatar', 'uploads/user_avatar.jpg'),
 (14, 'cover', 'uploads/homeScreen.jpg');
