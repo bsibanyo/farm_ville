@@ -1,3 +1,9 @@
+
+<script src="https://www.payfast.co.za/onsite/engine.js"></script>
+
+
+
+
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <?php 
 $total = 0;
@@ -33,7 +39,7 @@ $total = 0;
                       </div>
                         <div class="form-group col address-holder">
                             <label for="" class="control-label">Delivery Address</label>
-                            <textarea id="" cols="30" rows="3" name="delivery_address" class="form-control" style="resize:none"><?php echo $_settings->userdata('default_delivery_address') ?></textarea>
+                            <textarea required id="" cols="30" rows="3" name="delivery_address" class="form-control" style="resize:none"><?php echo $_settings->userdata('default_delivery_address') ?></textarea>
                         </div>
                         
                         <div class="col">
@@ -70,7 +76,20 @@ $total = 0;
                         <h4 class="text-muted">Payment Method</h4>
                             <div class="d-flex w-100 justify-content-between">
                                 <button class="btn btn-flat btn-dark">Card on Delivery</button> <b>OR</b>
-                                <span id="paypal-button"></span>
+                                
+                                <!--  -->
+                                <form action="https://sandbox.payfast.co.za/eng/process" method="post">
+                                    <input type="hidden" name="merchant_id" value="10000100">
+                                    <input type="hidden" name="merchant_key" value="46f0cd694581a">
+                                    <input type="hidden" name="return_url" value="https://986cdaa86a51.ngrok.io/return.php">
+                                    <input type="hidden" name="cancel_url" value="https://986cdaa86a51.ngrok.io/cancel.php">
+                                    <input type="hidden" name="notify_url" value="https://986cdaa86a51.ngrok.io/notify.php">
+                                    <input type="hidden" name="amount" value="1">
+                                    <input type="hidden" name="item_name" value="Test Product">
+                                    <input id="paypal-button" type="submit" value="Pay Now">
+                                </form>
+                                <!--  -->
+                                <!-- <span id="paypal-button"></span> -->
                             </div>
                         </div>
                     </div>
@@ -121,6 +140,9 @@ paypal.Button.render({
     },
  
 }, '#paypal-button');
+
+
+
 
 function payment_online(){
     $('[name="payment_method"]').val("Online Payment")
