@@ -69,7 +69,7 @@ $total = 0;
                         <div class="col my-3">
                         <h4 class="text-muted">Payment Method</h4>
                             <div class="d-flex w-100 justify-content-between">
-                                <button class="btn btn-flat btn-dark">Cash/Card on Delivery</button> <b>OR</b>
+                                <button class="btn btn-flat btn-dark">Card on Delivery</button> <b>OR</b>
                                 <span id="paypal-button"></span>
                             </div>
                         </div>

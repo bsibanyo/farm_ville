@@ -61,7 +61,8 @@
 <!-- Footer-->
 <footer class="py-5 bg-dark">
             <div class="container">
-              <p class="m-0 text-center text-white" class="fa fa-heart-o" >Rights Reserved &copy; <?php echo $_settings->info('short_name') ?> 2021</p>
+              <!-- <p class="m-0 text-center text-white" class="fa fa-heart-o" >Rights Reserved &copy; <?php echo $_settings->info('short_name') ?> 2021</p> -->
+              <p class="m-0 text-center text-white" class="fa fa-heart-o" >Rights Reserved by Farmville&trade; <?php $yr = date("Y"); echo $yr?></p>
               <!-- <p class="m-0 text-center text-white">Developed By: <a href="mailto:farmville@gmail.com">Farmville</a></p> -->
           </div>
         </footer>
