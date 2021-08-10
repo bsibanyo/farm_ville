@@ -1,108 +1,4 @@
-
-<script src="https://www.payfast.co.za/onsite/engine.js"></script>
-<?php
-/**
- * @param array $data
- * @param null $passPhrase
- * @return string
- */
-function generateSignature($data, $passPhrase = null) {
-    // Create parameter string
-    $pfOutput = '';
-    foreach( $data as $key => $val ) {
-        if($val !== '') {
-            $pfOutput .= $key .'='. urlencode( trim( $val ) ) .'&';
-        }
-    }
-    // Remove last ampersand
-    $getString = substr( $pfOutput, 0, -1 );
-    if( $passPhrase !== null ) {
-        $getString .= '&passphrase='. urlencode( trim( $passPhrase ) );
-    }
-    return md5( $getString );
-}
- 
-$passPhrase = '';
-$data = [
-    'merchant_id' => '17894434',
-    'merchant_key' => 'vd4ucu9rffhm2',
-    'return_url' => 'https://f8c1265a84a2.ngrok.io/return.php',
-    'cancel_url' => 'https://f8c1265a84a2.ngrok.io/cancel.php',
-    'notify_url' => 'https://f8c1265a84a2.ngrok.io/notify.php',
-    'name_first' => 'First Name',
-    'name_last'  => 'Last Name',
-    'email_address'=> 'test@test.com',
-    'm_payment_id' => '1234',
-    'amount' => 5.00,
-    'item_name' => 'Order#123',
-];
- 
-function dataToString($dataArray) {
-  // Create parameter string
-    $pfOutput = '';
-    foreach( $dataArray as $key => $val ) {
-        if($val !== '') {
-            $pfOutput .= $key .'='. urlencode( trim( $val ) ) .'&';
-        }
-    }
-    // Remove last ampersand
-    return substr( $pfOutput, 0, -1 );
-}
- 
-function generatePaymentIdentifier($pfParamString, $pfProxy = null) {
-    // Use cURL (if available)
-    if( in_array( 'curl', get_loaded_extensions(), true ) ) {
-        // Variable initialization
-        $url = 'https://www.payfast.co.za/onsite/process';
- 
-        // Create default cURL object
-        $ch = curl_init();
- 
-        // Set cURL options - Use curl_setopt for greater PHP compatibility
-        // Base settings
-        curl_setopt( $ch, CURLOPT_USERAGENT, NULL );  // Set user agent
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );      // Return output as string rather than outputting it
-        curl_setopt( $ch, CURLOPT_HEADER, false );             // Don't include header in output
-        curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2 );
-        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, true );
- 
-        // Standard settings
-        curl_setopt( $ch, CURLOPT_URL, $url );
-        curl_setopt( $ch, CURLOPT_POST, true );
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, $pfParamString );
-        if( !empty( $pfProxy ) )
-            curl_setopt( $ch, CURLOPT_PROXY, $pfProxy );
- 
-        // Execute cURL
-        $response = curl_exec( $ch );
-        curl_close( $ch );
-        echo $response;
-        $rsp = json_decode($response, true);
-        if ($rsp['uuid']) {
-            return $rsp['uuid'];
-        }
-    }
-    return null;
-}
- 
-// Generate signature (see Custom Integration -> Step 2)
-$signature = generateSignature($data);
-$data["signature"] = $signature;//generateSignature($data, $passPhrase);
- 
-// Convert the data array to a string
-$pfParamString = dataToString($data);
- 
-// Generate payment identifier
-$identifier = generatePaymentIdentifier($pfParamString);
-if($identifier != ''){
-   echo '<script type="text/javascript">window.payfast_do_onsite_payment({"uuid":"'.$identifier.'"});</script>';
-}
-?>
-
-
-
-
-<!-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> -->
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <?php 
 $total = 0;
     $qry = $conn->query("SELECT c.*,p.title,i.price,p.id as pid from `cart` c inner join `inventory` i on i.id=c.inventory_id inner join products p on p.id = i.product_id where c.client_id = ".$_settings->userdata('id'));
@@ -175,7 +71,7 @@ $total = 0;
                             <div class="d-flex w-100 justify-content-between">
                                 <button class="btn btn-flat btn-dark">Card on Delivery</button> <b>OR</b>
                                 
-                                <input type="submit" name="paynow" value="Pay Now">
+                                <!-- <input type="submit" name="paynow" value="Pay Now"> -->
                                 <!--  -->
                                 <!-- <form action="https://sandbox.payfast.co.za/eng/process" method="post">
                                     <input type="hidden" name="merchant_id" value="10022998">
@@ -188,7 +84,7 @@ $total = 0;
                                 </form> -->
                                 
                                 <!--  -->
-                                <!-- <span id="paypal-button"></span> -->
+                                <span id="paypal-button"></span>
                             </div>
                         </div>
                     </div>
