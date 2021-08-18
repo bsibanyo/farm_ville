@@ -1,10 +1,65 @@
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <?php 
-$total = 0;
+    $total = 0;
     $qry = $conn->query("SELECT c.*,p.title,i.price,p.id as pid from `cart` c inner join `inventory` i on i.id=c.inventory_id inner join products p on p.id = i.product_id where c.client_id = ".$_settings->userdata('id'));
     while($row= $qry->fetch_assoc()):
         $total += $row['price'] * $row['quantity'];
     endwhile;
+    
+?>
+<?php
+/**
+ * @param array $data
+ * @param null $passPhrase
+ * @return string
+ */
+function generateSignature($data, $passPhrase = null) {
+    // Create parameter string
+    $pfOutput = '';
+    foreach( $data as $key => $val ) {
+        if($val !== '') {
+            $pfOutput .= $key .'='. urlencode( trim( $val ) ) .'&';
+        }
+    }
+    // Remove last ampersand
+    $getString = substr( $pfOutput, 0, -1 );
+    if( $passPhrase !== null ) {
+        $getString .= '&passphrase='. urlencode( trim( $passPhrase ) );
+    }
+    return md5( $getString );
+}
+
+// Construct variables
+$cartTotal = 10.00;// This amount needs to be sourced from your application
+$data = array(
+    // Merchant details
+    'merchant_id' => '10000100',
+    'merchant_key' => '46f0cd694581a',
+    'return_url' => 'http://google.com',
+    'cancel_url' => 'http://facebook.com',
+    'notify_url' => 'http://facebook.com',
+    // Buyer details
+    'name_first' => 'First Name',
+    'name_last'  => 'Last Name',
+    'email_address'=> 'test@test.com',
+    // Transaction details
+    'm_payment_id' => '1234', //Unique payment ID to pass through to notify_url
+    'amount' => $total,
+    'item_name' => 'Order#123'
+);
+
+$signature = generateSignature($data);
+$data['signature'] = $signature;
+
+// If in testing mode make use of either sandbox.payfast.co.za or www.payfast.co.za
+$testingMode = true;
+$pfHost = $testingMode ? 'sandbox.payfast.co.za' : 'www.payfast.co.za';
+$htmlForm = '<form action="https://'.$pfHost.'/eng/process" method="post">';
+foreach($data as $name=> $value)
+{
+    $htmlForm .= '<input name="'.$name.'" type="hidden" value=\''.$value.'\' />';
+}
+$htmlForm .= '<input type="submit" value="Pay Now" /></form>';
 ?>
 <section class="py-5">
     <div class="container">
@@ -12,6 +67,7 @@ $total = 0;
             <div class="card-body"></div>
             <h3 class="text-center"><b>Checkout</b></h3>
             <hr class="border-dark">
+            <!-- Paypal -->
             <form action="" id="place_order">
                 <input type="hidden" name="amount" value="<?php echo $total ?>">
                 <input type="hidden" name="payment_method" value="cod">
@@ -85,11 +141,24 @@ $total = 0;
                                 
                                 <!--  -->
                                 <span id="paypal-button"></span>
+                                <!-- Payfast -->
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+            <!-- Live: https://www.payfast.co.za/eng/process -->
+            <!-- testing: https://sandbox.payfast.co.za​/eng/process -->
+            <!-- <form action="https://sandbox.payfast.co.za​/eng/process" method="post">
+                <input type="hidden" name="merchant_id" value="10000100">
+                <input type="hidden" name="merchant_key" value="46f0cd694581a">
+                <input type="hidden" name="amount" value="">
+                <input type="hidden" name="item_name" value="Test Product">
+                <input type="hidden" name="return_url" value="https://google.com/">
+                <input type="hidden" name="cancel_url" value="https://facebook.com/">
+                <input type="submit" value="PayFast" style="background: red; border: 0px solid black; color: white; border-radius: 10px;">
+            </form> -->
+            <?php echo $htmlForm?>
         </div>
     </div>
 </section>
