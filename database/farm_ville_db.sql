@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `cart`
 --
 
+USE farm_ville_db;
+
 CREATE TABLE `cart` (
   `id` int(30) NOT NULL,
   `client_id` int(30) NOT NULL,

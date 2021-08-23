@@ -55,7 +55,8 @@
                             null;
                         }
                         else {
-                            echo("<input class='form-control text-center me-3' id='inputQuantity' type='num' value='1' style='max-width: 3rem' name='quantity' />");
+                            $max_amount = $inv[0]['quantity'];
+                            echo("<input class='form-control text-center me-3' id='inputQuantity' type='number' value='1' style='max-width: 4rem' name='quantity' min='1' max='$max_amount'/>");
                            
                         }
                     ?>
