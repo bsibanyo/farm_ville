@@ -11,7 +11,7 @@
     return $output;
   }
   
-  function sanitize($input) {
+  function sanitizeData($input) {
     /*
       if (is_array($input)) {
           foreach($input as $var=>$val) {

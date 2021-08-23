@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group d-flex justify-content-between">
                     <a href="javascript:void()" id="login-show">I Remember?</a>
-                    <button class="btn btn-primary btn-flat">Send Link</button>
+                    <button class="btn btn-primary btn-flat" type="submit">Send Link</button>
                 </div>
             </form>
         </div>
@@ -37,19 +37,22 @@
             start_loader()
             if($('.err-msg').length > 0)
                 $('.err-msg').remove();
+                console.log(_base_url_+"classes/Login.php?f=forgot_password");
             $.ajax({
-                url:_base_url_+"classes/Login.php?f=login_user",
+                url:_base_url_+"classes/Login.php?f=forgot_password",
                 method:"POST",
                 data:$(this).serialize(),
                 dataType:"json",
                 error:err=>{
+                    console.log("This is an error")
                     console.log(err)
                     alert_toast("an error occured",'error')
                     end_loader()
                 },
                 success:function(resp){
+                    console.log(resp);
                     if(typeof resp == 'object' && resp.status == 'success'){
-                        alert_toast("Login Successfully",'success')
+                        alert_toast("A reset password email has been sent to you",'success')
                         setTimeout(function(){
                             location.reload()
                         },2000)

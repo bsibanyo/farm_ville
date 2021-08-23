@@ -7,6 +7,8 @@ session_start();
 require_once('initialize.php');
 require_once('classes/DBConnection.php');
 require_once('classes/SystemSettings.php');
+require_once('mailer.php');
+// require_once('inc/form_cleaner.php');
 $db = new DBConnection;
 $conn = $db->conn;
 
@@ -44,6 +46,10 @@ function isMobileDevice(){
     }
     //Otherwise return false..  
     return false;
+}
+
+function sanitize($input) {
+    return  filter_var($input, FILTER_SANITIZE_STRING);
 }
 ob_end_flush();
 ?>

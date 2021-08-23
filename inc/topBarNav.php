@@ -84,7 +84,7 @@
 
   $('#search-form').submit(function(e){
     e.preventDefault()
-     var sTxt = $('[name="search"]').val()
+     var sTxt = $('[name="search"]').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
      if(sTxt != '')
       location.href = './?p=products&search='+sTxt;
   })
