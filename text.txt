@@ -1,1 +1,9 @@
 https://www.juiceplus.com/at/en/juice-plus-experience/magazine.read.html/en/2018/3/9-fun-facts-about-fruit-and-vegetables-to-teach-your-kids.html
+
+// Page Reload
+    $.ajax({
+        ...
+        success: function() {
+            location.reload();
+        }
+    });

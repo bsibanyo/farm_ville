@@ -59,7 +59,7 @@ foreach($data as $name=> $value)
 {
     $htmlForm .= '<input name="'.$name.'" type="hidden" value=\''.$value.'\' />';
 }
-$htmlForm .= '<input type="submit" value="Pay Now" /></form>';
+$htmlForm .= '<input type="submit" class="btn btn-flat btn-dark" value="Pay Now" /></form>';
 ?>
 <section class="py-5">
     <div class="container">
@@ -125,21 +125,26 @@ $htmlForm .= '<input type="submit" value="Pay Now" /></form>';
                         <div class="col my-3">
                         <h4 class="text-muted">Payment Method</h4>
                             <div class="d-flex w-100 justify-content-between">
-                                <button class="btn btn-flat btn-dark">Card on Delivery</button> <b>OR</b>
+                                <button class="btn btn-flat btn-dark" name="COD">Card on Delivery</button>
+
+                                <?php 
+                                // if(isset($_POST['COD'])){
+                                //     $i = 1;
+					            // 	$qry = $conn->query("SELECT i.*,p.title as product,p.author from `inventory` i inner join `products` p on p.id = i.product_id order by unix_timestamp(i.date_created) desc ");
+					            // 	while($row = $qry->fetch_assoc()):
+					            // 	$sold = $conn->query("SELECT SUM(ol.quantity) as sold FROM order_list ol inner join orders o on o.id = ol.order_id where ol.product_id='{$row['id']}' and o.`status` != 4 ");
+					            // 	$sold = $sold->num_rows > 0 ? $sold->fetch_assoc()['sold'] : 0;
+					            // 	$avail = $row['quantity'] - $sold;
+					            // 	foreach($row as $k=> $v){
+					            // 		$row[$k] = trim(stripslashes($v));
+					            // 	}
+                                //     if()
+                                // }
+					            
+					            ?>
                                 
-                                <!-- <input type="submit" name="paynow" value="Pay Now"> -->
-                                <!--  -->
-                                <!-- <form action="https://sandbox.payfast.co.za/eng/process" method="post">
-                                    <input type="hidden" name="merchant_id" value="10022998">
-                                    <input type="hidden" name="merchant_key" value="mmsr7qgas6ajq">
-                                    <input type="hidden" name="return_url" value="https://986cdaa86a51.ngrok.io/return.php">
-                                    <input type="hidden" name="cancel_url" value="https://986cdaa86a51.ngrok.io/cancel.php">
-                                    <input type="hidden" name="notify_url" value="https://986cdaa86a51.ngrok.io/notify.php">
-                                    <input type="hidden" name="amount" value="">
-                                    <input type="hidden" name="item_name" value="Test Product">
-                                </form> -->
+                                <b>OR</b>
                                 
-                                <!--  -->
                                 <span id="paypal-button"></span>
                                 <!-- Payfast -->
                             </div>
@@ -147,17 +152,6 @@ $htmlForm .= '<input type="submit" value="Pay Now" /></form>';
                     </div>
                 </div>
             </form>
-            <!-- Live: https://www.payfast.co.za/eng/process -->
-            <!-- testing: https://sandbox.payfast.co.za​/eng/process -->
-            <!-- <form action="https://sandbox.payfast.co.za​/eng/process" method="post">
-                <input type="hidden" name="merchant_id" value="10000100">
-                <input type="hidden" name="merchant_key" value="46f0cd694581a">
-                <input type="hidden" name="amount" value="">
-                <input type="hidden" name="item_name" value="Test Product">
-                <input type="hidden" name="return_url" value="https://google.com/">
-                <input type="hidden" name="cancel_url" value="https://facebook.com/">
-                <input type="submit" value="PayFast" style="background: red; border: 0px solid black; color: white; border-radius: 10px;">
-            </form> -->
             <?php echo $htmlForm?>
         </div>
     </div>
