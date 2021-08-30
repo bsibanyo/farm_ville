@@ -1,5 +1,25 @@
+<?php
+    function stockLeft($conn, $product_id) {
+        $qry_2 = $conn->query("SELECT * FROM inventory");
+
+        while ($row = $qry_2->fetch_assoc()) {
+            if ($row['product_id'] == $product_id)
+            {
+                if ($row['quantity'] > 0)
+                    return $row['quantity'];
+                else
+                    return 0;
+            }
+        }
+    }
+?>
 
 <section class="py-5">
+    <script>
+        var secretArray = [];
+        var x;
+        var y;
+    </script>
     <div class="container">
         <div class="row">
             <div class="col d-flex justify-content-end mb-2">
@@ -10,9 +30,9 @@
             <div class="card-body">
                 <h3><b>Cart List</b></h3>
                 <hr class="border-dark">
-                <?php 
+                <?php
                     $qry = $conn->query("SELECT c.*,p.title,i.price,p.id as pid from `cart` c inner join `inventory` i on i.id=c.inventory_id inner join products p on p.id = i.product_id where c.client_id = ".$_settings->userdata('id'));
-                    while($row= $qry->fetch_assoc()):
+                    while($row= $qry->fetch_assoc()) {
                         $upload_path = base_app.'/uploads/product_'.$row['pid'];
                         $img = "";
                         foreach($row as $k=> $v){
@@ -24,6 +44,8 @@
                                 $img = "uploads/product_".$row['pid']."/".$fileO[2];
                             // var_dump($fileO);
                         }
+                        $stock = stockLeft($conn, $row['inventory_id']);
+                        if ($stock > 0) {
                 ?>
                     <div class="d-flex w-100 justify-content-between  mb-2 py-2 border-bottom cart-item">
                         <div class="d-flex align-items-center col-8">
@@ -31,14 +53,27 @@
                             <img src="<?php echo validate_image($img) ?>" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" alt="">
                             <div>
                                 <p class="mb-1 mb-sm-1"><?php echo $row['title'] ?></p>
-                                
+                                <p class="mb-1 mb-sm-1"><small><b>Stock left:</b> <span class=""><?php echo $stock?></span></small></p>
                                 <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price"><?php echo number_format($row['price']) ?></span></small></p>
                                 <div>
                                 <div class="input-group" style="width:130px !important">
+                                    <?php
+                                        $value;
+                                        if ($stock > $row['quantity'])
+                                            $value = $row['quantity'];
+                                        else
+                                            $value = $stock;
+                                    ?>
+                                    <script>
+                                        x = <?php echo $row['id'] ?>;
+                                        y = <?php echo $stock ?>;
+                                        secretArray[x] = y;
+                                        
+                                    </script>
                                     <div class="input-group-prepend">
                                         <button class="btn btn-sm btn-outline-secondaryRed min-qty" type="button" id="button-addon1"><i class="fa fa-minus"></i></button>
                                     </div>
-                                    <input type="number" class="form-control form-control-sm qty text-center cart-qty" placeholder="" aria-label="Example text with button addon" value="<?php echo $row['quantity'] ?>" aria-describedby="button-addon1" data-id="<?php echo $row['id'] ?>" readonly>
+                                    <input type="number" class="form-control form-control-sm qty text-center cart-qty" placeholder="" aria-label="Example text with button addon" value="<?php echo $value ?>" aria-describedby="button-addon1" data-id="<?php echo $row['id'] ?>" readonly>
                                     <div class="input-group-append">
                                         <button class="btn btn-sm btn-outline-secondary plus-qty" type="button" id="button-addon1"><i class="fa fa-plus"></i></button>
                                     </div>
@@ -50,7 +85,7 @@
                             <h4><b class="total-amount"><?php echo number_format($row['price'] * $row['quantity']) ?></b></h4>
                         </div>
                     </div>
-                <?php endwhile; ?>
+                <?php }}; ?>
 
                 
                 <div class="d-flex w-100 justify-content-between mb-2 py-2 border-bottom">
@@ -80,8 +115,8 @@
         var qty = _this.closest('.cart-item').find('.cart-qty').val()
         var price = _this.closest('.cart-item').find('.price').text()
             price = price.replace(/,/g,'')
-            console.log(price)
-        var cart_id = _this.closest('.cart-item').find('.cart-qty').attr('data-id')
+        var cart_id = _this.closest('.cart-item').find('.cart-qty').attr('data-id');
+        var stockQty = secretArray[cart_id];
         var new_total = 0
         start_loader();
         if($type == 'minus'){
@@ -90,7 +125,11 @@
                 qty = 0;
             }
         }else{
-            qty = parseInt(qty) + 1
+            var qtyMod = qty;
+            if (++qtyMod <= stockQty)
+                qty = parseInt(qty) + 1;
+            else
+                qty = parseInt(qty) + 0;
             // if(qty >= $row['quantity']){
             //     qty = $row['quantity'];
             // }
