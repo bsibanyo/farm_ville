@@ -64,7 +64,6 @@
             </div>
         </div>
     </form>
-
 </div>
 <script>
     $(function(){

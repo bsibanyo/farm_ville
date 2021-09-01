@@ -1,5 +1,4 @@
-
-  <style>
+<style>
     #uni_modal .modal-content>.modal-footer,#uni_modal .modal-content>.modal-header{
         display:none;
     }

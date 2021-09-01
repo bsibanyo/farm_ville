@@ -6,7 +6,7 @@
               <span class="info-box-icon bg-light elevation-1"><i class="fas fa-book-open"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Total Stock</span>
+                <span class="info-box-text">Total Books</span>
                 <span class="info-box-number">
                   <?php 
                     $inv = $conn->query("SELECT sum(quantity) as total FROM inventory ")->fetch_assoc()['total'];

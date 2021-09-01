@@ -269,7 +269,7 @@ Class Master extends DBConnection {
 		foreach($_POST as $k =>$v){
 			if(!in_array($k,array('id'))){
 				if(!empty($data)) $data .=",";
-				$data .= " `{$k}`='".htmlspecialchars(strip_tags(trim($v)), ENT_QUOTES, 'UTF-8')."' ";
+				$data .= " `{$k}`='{$v}' ";
 			}
 		}
 		$check = $this->conn->query("SELECT * FROM `clients` where `email` = '{$email}' ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;

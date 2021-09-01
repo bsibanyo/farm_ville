@@ -35,7 +35,7 @@
                       <a href="<?php echo base_url ?>admin/?page=product" class="nav-link nav-product">
                         <i class="nav-icon fas fa-book-open"></i>
                         <p>
-                          Product List
+                          Book List
                         </p>
                       </a>
                     </li>

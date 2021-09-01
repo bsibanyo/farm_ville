@@ -7,3 +7,5 @@ https://www.juiceplus.com/at/en/juice-plus-experience/magazine.read.html/en/2018
             location.reload();
         }
     });
+
+    // $update = $conn->query("UPDATE `inventory` SET quantity= $row['quantity'] - '$sold' WHERE product_id='{$row['id']}' ");
