@@ -90,8 +90,6 @@
 					            
 					            ?>
                                 
-                                <b>OR</b>
-                                
                                 <!-- <span id="paypal-button"></span> -->
                                 <!-- Payfast -->
                                 <?php
@@ -118,17 +116,18 @@
                         
                         // Construct variables
                         $cartTotal = 10.00;// This amount needs to be sourced from your application
+                        $testingMode = false;
                         $data = array(
                             // Merchant details
-                            'merchant_id' => '10000100',
-                            'merchant_key' => '46f0cd694581a',
+                            'merchant_id' => $testingMode ? '10000100' : '17894434',
+                            'merchant_key' => $testingMode ? '46f0cd694581a': 'vd4ucu9rffhm2',
                             'return_url' => 'http://google.com',
                             'cancel_url' => 'http://facebook.com',
                             'notify_url' => 'http://facebook.com',
                             // Buyer details
-                            'name_first' => 'First Name',
-                            'name_last'  => 'Last Name',
-                            'email_address'=> 'test@test.com',
+                            'name_first' => $_settings->userdata('firstname'),
+                            'name_last'  => $_settings->userdata('lastname'),
+                            'email_address'=> $_settings->userdata('email'),
                             // Transaction details
                             'm_payment_id' => '1234', //Unique payment ID to pass through to notify_url
                             'amount' => $grandTotal,
@@ -139,14 +138,13 @@
                         $data['signature'] = $signature;
                         
                         // If in testing mode make use of either sandbox.payfast.co.za or www.payfast.co.za
-                        $testingMode = true;
                         $pfHost = $testingMode ? 'sandbox.payfast.co.za' : 'www.payfast.co.za';
                         $htmlForm = '<form action="https://'.$pfHost.'/eng/process" method="post">';
                         foreach($data as $name=> $value)
                         {
                             $htmlForm .= '<input name="'.$name.'" type="hidden" value=\''.$value.'\' />';
                         }
-                        $htmlForm .= '<input type="submit" class="btn btn-flat btn-dark" value="Pay Now" /></form>';
+                        $htmlForm .= '<input style="float: left;" type="submit" class="btn btn-flat btn-dark" value="Payfast" /></form>';
                         ?>
                             </div>
                         </div>
