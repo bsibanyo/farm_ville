@@ -36,8 +36,11 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     $sub_categories = array();
                     while($row= $qry->fetch_assoc()):
                     $sub_categories[$row['parent_id']][] = $row;
+                    echo "<option value=" .$row["id"] .">".$row["sub_category"] ."</option>";
                     endwhile; 
                 ?>
+            
+                <!--<option value="<?php //echo $row['id'] ?>" <?php //echo isset($sub_category_id) && $sub_category_id == $row['id'] ? 'selected' : '' ?>><?php //echo $row['sub_category'] ?></option>-->
                 </select>
 			</div>
 			<div class="form-group">
